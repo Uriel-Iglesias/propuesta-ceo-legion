@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Activa tu Founders Key — CEO LEGION × NFC-LAB</title>
+<meta name="description" content="Cómo configurar tu llavero NFC CEO LEGION en 3 minutos. iPhone y Android." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          display: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+        },
+        colors: {
+          ink: { 900: '#06080d', 800: '#0b0d14', 700: '#11141d', 600: '#181b26', 500: '#22262f' },
+          legion: { 300: '#7ab6ff', 400: '#4a9eff', 500: '#1e7fdc', 600: '#0d5cf0', 700: '#0846b8' },
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    background: #06080d;
+    color: #ececf1;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  .title-wide { font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; }
+  .title-mega { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; font-weight: 700; line-height: 0.95; }
+  .nfc-label { letter-spacing: 0.45em; font-size: 0.7rem; font-weight: 500; color: #6f7585; text-transform: uppercase; }
+  .corner-mark::before {
+    content: "-*"; position: absolute; top: 1.5rem; left: 1.5rem;
+    font-family: 'Space Grotesk', sans-serif; color: rgba(255,255,255,0.35);
+    letter-spacing: 0.2em; font-size: 0.85rem; z-index: 2;
+  }
+  .glass { background: rgba(11,13,20,0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .grid-bg {
+    background-image:
+      radial-gradient(circle at 30% 20%, rgba(30,127,220,0.14) 0%, transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(30,127,220,0.08) 0%, transparent 50%),
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: auto, auto, 60px 60px, 60px 60px;
+  }
+  .step-num {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 4rem; line-height: 1;
+    background: linear-gradient(180deg, rgba(74,158,255,0.95) 0%, rgba(74,158,255,0.2) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .tab-active { background: rgba(30,127,220,0.15); border-color: rgba(74,158,255,0.5); color: #fff; }
+  .tab-inactive { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid rgba(74,158,255,0.3); background: rgba(30,127,220,0.08);
+    color: #7ab6ff; padding: 0.35rem 0.85rem; border-radius: 9999px;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 500;
+  }
+  .step-card { transition: transform .3s ease, border-color .3s ease; }
+  .step-card:hover { transform: translateY(-2px); border-color: rgba(30,127,220,0.4); }
+  kbd {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    padding: 0.15rem 0.55rem; border-radius: 6px; font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8em; font-weight: 600; color: #fff;
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ============== NAV ============== -->
+<nav class="fixed top-0 inset-x-0 z-50 glass border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white/50"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span class="nfc-label">Propuesta</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <div class="w-2 h-2 rounded-full bg-legion-500 pulse-dot"></div>
+      <span class="nfc-label text-white/80">Activar Founders Key</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section class="relative pt-32 pb-20 corner-mark grid-bg overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink-900"></div>
+
+  <div class="relative max-w-5xl mx-auto px-6 text-center">
+    <div class="inline-flex mb-8">
+      <span class="badge">
+        <span class="w-1.5 h-1.5 rounded-full bg-legion-400 pulse-dot"></span>
+        Mi Founders Key
+      </span>
+    </div>
+
+    <div class="nfc-label mb-8">N F C - L A B   ·   M A N U A L</div>
+
+    <h1 class="title-mega text-5xl md:text-7xl mb-8">
+      Activa tu <span class="bg-gradient-to-r from-legion-400 to-legion-700 bg-clip-text text-transparent">Founders Key</span><br/>
+      en 3 minutos.
+    </h1>
+
+    <p class="text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
+      Una vez configurado, cada vez que conozcas a alguien podrás invitarle a CEO LEGION con un solo toque. Y ganarás <span class="text-legion-300 font-medium">+20 % de comisión vitalicia</span> por cada legionario que entre.
+    </p>
+
+    <!-- KPIs -->
+    <div class="mt-12 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+      <div class="p-4 bg-white/[0.03] border border-white/10 rounded-2xl">
+        <div class="font-display text-3xl font-bold text-legion-400">3 min</div>
+        <div class="nfc-label text-white/40 mt-1">de setup</div>
+      </div>
+      <div class="p-4 bg-white/[0.03] border border-white/10 rounded-2xl">
+        <div class="font-display text-3xl font-bold text-legion-400">1 app</div>
+        <div class="nfc-label text-white/40 mt-1">gratuita</div>
+      </div>
+      <div class="p-4 bg-white/[0.03] border border-white/10 rounded-2xl">
+        <div class="font-display text-3xl font-bold text-legion-400">∞</div>
+        <div class="nfc-label text-white/40 mt-1">veces<br/>regrabable</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TABS iPhone / Android ============== -->
+<section class="relative py-16 corner-mark border-t border-white/5">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <div class="text-center mb-12 reveal">
+      <span class="badge mb-6">Paso a paso</span>
+      <h2 class="title-mega text-4xl md:text-5xl mt-6">Elige tu sistema.</h2>
+    </div>
+
+    <div class="flex justify-center gap-3 mb-12">
+      <button type="button" data-tab="ios" class="tab-btn tab-active flex items-center gap-2 px-6 py-3 rounded-full border text-sm font-medium transition">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4c-1.09-.5-2.08-.48-3.24 0c-1.44.62-2.2.44-3.06-.42C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8c1.18-.24 2.31-.93 3.57-.84c1.51.12 2.65.72 3.4 1.8c-3.12 1.87-2.38 5.98.48 7.13c-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25c.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+        iPhone
+      </button>
+      <button type="button" data-tab="android" class="tab-btn tab-inactive flex items-center gap-2 px-6 py-3 rounded-full border text-sm font-medium transition">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 0 0-.83.22l-1.88 3.24a11.43 11.43 0 0 0-8.94 0L5.65 5.67a.643.643 0 0 0-.87-.2c-.28.18-.37.54-.22.83L6.4 9.48A10.78 10.78 0 0 0 1 18h22a10.78 10.78 0 0 0-5.4-8.52M7 15.25a1.25 1.25 0 1 1 0-2.5a1.25 1.25 0 0 1 0 2.5m10 0a1.25 1.25 0 1 1 0-2.5a1.25 1.25 0 0 1 0 2.5"/></svg>
+        Android
+      </button>
+    </div>
+
+    <!-- ============== iPHONE PANEL ============== -->
+    <div id="panel-ios" class="panel active space-y-6">
+
+      <!-- App -->
+      <div class="step-card bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 reveal">
+        <div class="step-num">01</div>
+        <div class="flex-1">
+          <div class="nfc-label text-legion-400 mb-2">App Store</div>
+          <h3 class="font-display text-xl font-bold mb-2">Descarga NFC21 Tools</h3>
+          <p class="text-sm text-white/55 leading-relaxed mb-4">
+            Abre la App Store, busca <kbd>NFC21 Tools</kbd> y descárgala. Es gratuita y solo pide permisos de NFC.
+          </p>
+          <a href="https://apps.apple.com/es/app/nfc21-tools/id1428280377" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 text-xs text-legion-400 hover:text-legion-300 transition">
+            Abrir en App Store
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l10-10M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Skool -->
+      <div class="step-card bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 reveal">
+        <div class="step-num">02</div>
+        <div class="flex-1">
+          <div class="nfc-label text-legion-400 mb-2">Skool app</div>
+          <h3 class="font-display text-xl font-bold mb-2">Copia tu link de invitación</h3>
+          <ol class="text-sm text-white/55 leading-relaxed space-y-2 mb-4 list-none">
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Entra a tu comunidad <strong class="text-white">CEO LEGION</strong> en Skool.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Toca los <kbd>···</kbd> arriba a la derecha.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Selecciona <kbd>Invite people</kbd>.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Copia el link «<em>Earn 20 % commission for life when you invite a CEO Legend</em>».</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Pegar -->
+      <div class="step-card bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 reveal">
+        <div class="step-num">03</div>
+        <div class="flex-1">
+          <div class="nfc-label text-legion-400 mb-2">NFC21 Tools</div>
+          <h3 class="font-display text-xl font-bold mb-2">Crea un «URL Tag»</h3>
+          <ol class="text-sm text-white/55 leading-relaxed space-y-2 list-none">
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Vuelve a NFC21 Tools.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Selecciona <kbd>Tag types</kbd> y luego <kbd>New URL tag</kbd>.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Pega el link que has copiado de Skool.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Pulsa <kbd>Done</kbd>.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Escribir -->
+      <div class="step-card bg-gradient-to-br from-legion-500/15 to-transparent border border-legion-500/40 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 reveal">
+        <div class="step-num">04</div>
+        <div class="flex-1">
+          <div class="nfc-label text-legion-300 mb-2">El momento clave</div>
+          <h3 class="font-display text-xl font-bold mb-2">Escribe en tu llavero</h3>
+          <ol class="text-sm text-white/70 leading-relaxed space-y-2 list-none mb-4">
+            <li class="flex gap-3"><span class="text-legion-300">→</span> Pulsa <kbd>Write to NFC</kbd>.</li>
+            <li class="flex gap-3"><span class="text-legion-300">→</span> Acerca la parte superior trasera del iPhone al llavero.</li>
+            <li class="flex gap-3"><span class="text-legion-300">→</span> Mantén 2 segundos hasta el feedback. <strong class="text-white">Listo.</strong></li>
+          </ol>
+          <div class="flex items-center gap-3 p-3 bg-ink-900/40 border border-white/5 rounded-xl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <p class="text-xs text-white/60">A partir de ahora, cualquier persona que toque tu llavero entra directamente a tu invitación CEO LEGION.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== ANDROID PANEL ============== -->
+    <div id="panel-android" class="panel space-y-6">
+
+      <div class="step-card bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 reveal">
+        <div class="step-num">01</div>
+        <div class="flex-1">
+          <div class="nfc-label text-legion-400 mb-2">Google Play</div>
+          <h3 class="font-display text-xl font-bold mb-2">Descarga NFC Tools</h3>
+          <p class="text-sm text-white/55 leading-relaxed mb-4">
+            En Android, NFC21 Tools no está disponible. Usa <kbd>NFC Tools</kbd> de wakdev — gratuita, hace lo mismo y es la app más usada del sector.
+          </p>
+          <a href="https://play.google.com/store/apps/details?id=com.wakdev.wdnfc" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 text-xs text-legion-400 hover:text-legion-300 transition">
+            Abrir en Google Play
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l10-10M7 7h10v10"/></svg>
+          </a>
+          <div class="mt-4 flex items-center gap-3 p-3 bg-white/[0.02] border border-white/5 rounded-xl">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7ab6ff" stroke-width="2" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <p class="text-xs text-white/50">Activa el NFC del móvil en Ajustes → Conexiones → NFC antes de empezar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 reveal">
+        <div class="step-num">02</div>
+        <div class="flex-1">
+          <div class="nfc-label text-legion-400 mb-2">Skool app</div>
+          <h3 class="font-display text-xl font-bold mb-2">Copia tu link de invitación</h3>
+          <ol class="text-sm text-white/55 leading-relaxed space-y-2 list-none">
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Entra a tu comunidad <strong class="text-white">CEO LEGION</strong> en Skool.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Toca los <kbd>···</kbd> arriba a la derecha.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Selecciona <kbd>Invite people</kbd>.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Copia el link «<em>Earn 20 % commission for life when you invite a CEO Legend</em>».</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step-card bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 reveal">
+        <div class="step-num">03</div>
+        <div class="flex-1">
+          <div class="nfc-label text-legion-400 mb-2">NFC Tools</div>
+          <h3 class="font-display text-xl font-bold mb-2">Configura el «URL Tag»</h3>
+          <ol class="text-sm text-white/55 leading-relaxed space-y-2 list-none">
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Abre NFC Tools y pulsa <kbd>Write</kbd>.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Toca <kbd>Add a record</kbd> → <kbd>URL / URI</kbd>.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Pega el link de Skool y pulsa <kbd>OK</kbd>.</li>
+            <li class="flex gap-3"><span class="text-legion-400">→</span> Pulsa <kbd>Write / 1 byte</kbd> abajo.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step-card bg-gradient-to-br from-legion-500/15 to-transparent border border-legion-500/40 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 reveal">
+        <div class="step-num">04</div>
+        <div class="flex-1">
+          <div class="nfc-label text-legion-300 mb-2">El momento clave</div>
+          <h3 class="font-display text-xl font-bold mb-2">Escribe en tu llavero</h3>
+          <ol class="text-sm text-white/70 leading-relaxed space-y-2 list-none mb-4">
+            <li class="flex gap-3"><span class="text-legion-300">→</span> Cuando aparezca «<em>Approach an NFC tag</em>», acerca el móvil al llavero.</li>
+            <li class="flex gap-3"><span class="text-legion-300">→</span> La zona NFC del Android está habitualmente en la parte central trasera.</li>
+            <li class="flex gap-3"><span class="text-legion-300">→</span> Espera el aviso «<em>Write complete!</em>». <strong class="text-white">Listo.</strong></li>
+          </ol>
+          <div class="flex items-center gap-3 p-3 bg-ink-900/40 border border-white/5 rounded-xl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <p class="text-xs text-white/60">A partir de ahora, cualquier persona (iPhone o Android) que toque tu llavero entra directamente a tu invitación CEO LEGION.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== USE CASE ============== -->
+<section class="relative py-32 corner-mark border-t border-white/5 bg-gradient-to-b from-ink-900 via-ink-800/40 to-ink-900">
+  <div class="max-w-5xl mx-auto px-6 text-center reveal">
+    <span class="badge mb-6">Cuando lo uses</span>
+    <h2 class="title-mega text-4xl md:text-6xl mt-6 mb-8 leading-tight">
+      Cada vez que conozcas<br/>a otro CEO, <span class="text-legion-400">enséñaselo</span>.
+    </h2>
+    <p class="text-lg text-white/60 max-w-3xl mx-auto leading-relaxed mb-12">
+      Acerca el llavero a su móvil. En 2 segundos verá tu invitación a CEO LEGION. Si entra, <span class="text-legion-300 font-medium">tú ganas el 20 % de su membresía de por vida</span>.
+    </p>
+
+    <div class="grid sm:grid-cols-3 gap-6">
+      <div class="p-6 bg-white/[0.03] border border-white/10 rounded-2xl">
+        <div class="w-12 h-12 rounded-full bg-legion-500/10 flex items-center justify-center mb-4 mx-auto">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg mb-1">En reuniones</h3>
+        <p class="text-xs text-white/55">Sustituye la tarjeta de visita.</p>
+      </div>
+      <div class="p-6 bg-white/[0.03] border border-white/10 rounded-2xl">
+        <div class="w-12 h-12 rounded-full bg-legion-500/10 flex items-center justify-center mb-4 mx-auto">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg mb-1">En eventos</h3>
+        <p class="text-xs text-white/55">Captación masiva en networking.</p>
+      </div>
+      <div class="p-6 bg-white/[0.03] border border-white/10 rounded-2xl">
+        <div class="w-12 h-12 rounded-full bg-legion-500/10 flex items-center justify-center mb-4 mx-auto">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg mb-1">En cafés</h3>
+        <p class="text-xs text-white/55">Llaves físicas para tribu real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="relative py-32 corner-mark border-t border-white/5">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-12 reveal">
+      <span class="badge mb-6">Dudas frecuentes</span>
+      <h2 class="title-mega text-4xl md:text-5xl mt-6">Lo que vais a preguntar.</h2>
+    </div>
+
+    <div class="space-y-3">
+      <details class="group bg-white/[0.03] border border-white/10 rounded-2xl p-5 reveal" open>
+        <summary class="cursor-pointer flex items-center justify-between font-medium text-white">
+          ¿Y si me equivoco al escribir el link?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="text-sm text-white/55 mt-3 leading-relaxed">El llavero es regrabable infinitas veces. Solo tienes que repetir el proceso con el nuevo link. El anterior queda sobrescrito.</p>
+      </details>
+
+      <details class="group bg-white/[0.03] border border-white/10 rounded-2xl p-5 reveal">
+        <summary class="cursor-pointer flex items-center justify-between font-medium text-white">
+          ¿Hace falta que la otra persona instale una app?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="text-sm text-white/55 mt-3 leading-relaxed">No. Cualquier iPhone (modelo 7 o superior) y prácticamente cualquier Android moderno detectan NFC de fábrica. Al acercar el móvil, salta una notificación con tu enlace.</p>
+      </details>
+
+      <details class="group bg-white/[0.03] border border-white/10 rounded-2xl p-5 reveal">
+        <summary class="cursor-pointer flex items-center justify-between font-medium text-white">
+          ¿Puedo cambiar el link más adelante?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="text-sm text-white/55 mt-3 leading-relaxed">Cuando quieras. Hoy apunta a tu link de invitación de Skool, mañana puede apuntar a tu Calendly, a una landing concreta o a tu LinkedIn. Tú decides.</p>
+      </details>
+
+      <details class="group bg-white/[0.03] border border-white/10 rounded-2xl p-5 reveal">
+        <summary class="cursor-pointer flex items-center justify-between font-medium text-white">
+          ¿Funciona si lo llevo con otras llaves de metal?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="text-sm text-white/55 mt-3 leading-relaxed">Sí. El chip está aislado y trabaja a corta distancia. Lo único que puede afectar es pegarlo directamente contra una superficie metálica grande (separa 1-2 cm).</p>
+      </details>
+
+      <details class="group bg-white/[0.03] border border-white/10 rounded-2xl p-5 reveal">
+        <summary class="cursor-pointer flex items-center justify-between font-medium text-white">
+          ¿Y si no me sale la notificación en el iPhone?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="text-sm text-white/55 mt-3 leading-relaxed">Acerca el llavero a la <strong>parte superior trasera</strong> del iPhone (donde está la cámara). El sensor NFC vive ahí. Si el iPhone está bloqueado, también funciona.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CIERRE ============== -->
+<section class="relative py-24 corner-mark border-t border-white/5 overflow-hidden">
+  <div class="absolute inset-0 grid-bg opacity-50"></div>
+  <div class="relative max-w-3xl mx-auto px-6 text-center">
+    <h2 class="title-mega text-3xl md:text-5xl mb-6">¿Te has atascado?</h2>
+    <p class="text-white/60 mb-8">Escríbeme directamente y te lo grabo yo mismo en 2 minutos por videollamada.</p>
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="mailto:uriel@nfc-lab.com" class="bg-legion-500 hover:bg-legion-600 text-white font-medium px-6 py-3 rounded-full transition inline-flex items-center gap-2">
+        uriel@nfc-lab.com
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:+34690390557" class="border border-white/15 hover:border-white/40 text-white px-6 py-3 rounded-full font-medium transition">
+        +34 690 390 557
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="border-t border-white/5 py-10">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-white/30">
+    <a href="index.html" class="flex items-center gap-3 hover:text-white/60 transition">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span class="title-wide">Volver a la propuesta</span>
+    </a>
+    <div class="title-wide">N F C - L A B  ·  2 0 2 6</div>
+    <div class="title-wide">Made in Spain</div>
+  </div>
+</footer>
+
+<script>
+  // Tabs
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => { x.classList.remove('tab-active'); x.classList.add('tab-inactive'); });
+    t.classList.add('tab-active'); t.classList.remove('tab-inactive');
+    panels.forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + t.dataset.tab).classList.add('active');
+    document.querySelectorAll('#panel-' + t.dataset.tab + ' .reveal').forEach(el => el.classList.add('is-visible'));
+  }));
+
+  // Reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

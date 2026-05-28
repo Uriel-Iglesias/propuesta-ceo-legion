@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NFC-LAB × CEO LEGION — Propuesta</title>
+<meta name="description" content="Propuesta NFC-LAB para CEO LEGION: cada legionario lleva el casco, cada toque abre la puerta a la comunidad." />
+
+<meta property="og:title" content="NFC-LAB × CEO LEGION" />
+<meta property="og:description" content="Más que un llavero. Una llave física a tu comunidad." />
+<meta property="og:image" content="img/tap-phone.png" />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          display: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+        },
+        colors: {
+          ink: { 900: '#06080d', 800: '#0b0d14', 700: '#11141d', 600: '#181b26', 500: '#22262f' },
+          legion: { 300: '#7ab6ff', 400: '#4a9eff', 500: '#1e7fdc', 600: '#0d5cf0', 700: '#0846b8' },
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    background: #06080d;
+    color: #ececf1;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  .title-wide { font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; }
+  .title-mega { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; font-weight: 700; line-height: 0.95; }
+  .nfc-label { letter-spacing: 0.45em; font-size: 0.7rem; font-weight: 500; color: #6f7585; text-transform: uppercase; }
+  .corner-mark::before {
+    content: "-*"; position: absolute; top: 1.5rem; left: 1.5rem;
+    font-family: 'Space Grotesk', sans-serif; color: rgba(255,255,255,0.35);
+    letter-spacing: 0.2em; font-size: 0.85rem; z-index: 2;
+  }
+  .glow-blue { box-shadow: 0 0 80px -10px rgba(30,127,220,0.35), 0 0 200px -40px rgba(30,127,220,0.2); }
+  .grid-bg {
+    background-image:
+      radial-gradient(circle at 30% 20%, rgba(30,127,220,0.14) 0%, transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(30,127,220,0.08) 0%, transparent 50%),
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: auto, auto, 60px 60px, 60px 60px;
+  }
+  .scan-line { background: linear-gradient(90deg, transparent, rgba(30,127,220,0.5), transparent); height: 1px; }
+  .card-hover { transition: transform .35s ease, border-color .35s ease, background-color .35s ease; }
+  .card-hover:hover { transform: translateY(-4px); border-color: rgba(30,127,220,0.45); }
+  .ring-glow { box-shadow: inset 0 0 0 1px rgba(30,127,220,0.4), 0 0 30px -8px rgba(30,127,220,0.4); }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .pack-popular { background: linear-gradient(180deg, rgba(30,127,220,0.18) 0%, rgba(30,127,220,0.04) 100%); border-color: rgba(74,158,255,0.6); }
+  @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
+  .marquee { mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); overflow: hidden; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-track { display: flex; gap: 4rem; width: max-content; animation: marquee 45s linear infinite; }
+  .blueprint-grid {
+    background-image:
+      linear-gradient(rgba(30,127,220,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,127,220,0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .num-step {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 7rem; line-height: 0.85;
+    background: linear-gradient(180deg, rgba(74,158,255,0.85) 0%, rgba(74,158,255,0.05) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .quote-marks::before { content: '"'; font-size: 4rem; line-height: 0; vertical-align: -0.5em; color: rgba(74,158,255,0.5); }
+  .img-mask { mask-image: linear-gradient(180deg, #000 70%, transparent 100%); -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%); }
+  .glass { background: rgba(11,13,20,0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid rgba(74,158,255,0.3); background: rgba(30,127,220,0.08);
+    color: #7ab6ff; padding: 0.35rem 0.85rem; border-radius: 9999px;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 500;
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ============== NAV ============== -->
+<nav class="fixed top-0 inset-x-0 z-50 glass border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-2 h-2 rounded-full bg-legion-500 pulse-dot"></div>
+      <span class="nfc-label">N F C - L A B</span>
+      <span class="text-white/20">×</span>
+      <span class="nfc-label text-white/80">CEO LEGION</span>
+    </div>
+    <div class="hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.2em] text-white/50">
+      <a href="#concepto" class="hover:text-white transition">Concepto</a>
+      <a href="#proceso" class="hover:text-white transition">Proceso</a>
+      <a href="#packs" class="hover:text-white transition">Packs</a>
+      <a href="activar.html" class="hover:text-white transition">Activar</a>
+    </div>
+    <a href="#packs" class="hidden sm:inline-flex items-center gap-2 text-sm font-medium bg-legion-500 hover:bg-legion-600 transition px-4 py-2 rounded-full">
+      Ver packs
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ============== 1. HERO ============== -->
+<section class="relative min-h-screen flex items-center justify-center grid-bg corner-mark overflow-hidden pt-20">
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink-900"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-12 gap-12 items-center w-full">
+
+    <div class="lg:col-span-7 text-center lg:text-left">
+      <div class="nfc-label mb-10">N F C - L A B   ·   P R O P U E S T A   2 0 2 6</div>
+
+      <div class="inline-flex mb-10">
+        <span class="badge">
+          <span class="w-1.5 h-1.5 rounded-full bg-legion-400 pulse-dot"></span>
+          Founders Edition · est. 2026
+        </span>
+      </div>
+
+      <h1 class="title-mega text-6xl sm:text-7xl md:text-8xl mb-8">
+        ENTRA EN<br/>
+        <span class="bg-gradient-to-r from-legion-400 via-legion-500 to-legion-700 bg-clip-text text-transparent">LA LEGIÓN.</span>
+      </h1>
+
+      <p class="text-lg md:text-xl text-white/60 max-w-xl lg:mx-0 mx-auto mb-10 leading-relaxed">
+        Una llave física que cada legionario lleva encima. Un toque y abre <span class="text-white font-medium">tu</span> comunidad, <span class="text-white font-medium">tu</span> agenda, <span class="text-white font-medium">tu</span> link de invitación.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+        <a href="#packs" class="bg-legion-500 hover:bg-legion-600 text-white px-7 py-4 rounded-full font-semibold transition inline-flex items-center justify-center gap-2">
+          Ver los 3 packs
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#concepto" class="border border-white/15 hover:border-white/40 text-white px-7 py-4 rounded-full font-medium transition">
+          Cómo funciona
+        </a>
+      </div>
+
+      <div class="mt-14 grid grid-cols-3 gap-6 max-w-md lg:mx-0 mx-auto">
+        <div>
+          <div class="font-display text-3xl font-bold text-legion-400">100</div>
+          <div class="nfc-label text-white/40 mt-1">unidades<br/>iniciales</div>
+        </div>
+        <div>
+          <div class="font-display text-3xl font-bold text-legion-400">+20</div>
+          <div class="nfc-label text-white/40 mt-1">al mes<br/>recurrentes</div>
+        </div>
+        <div>
+          <div class="font-display text-3xl font-bold text-legion-400">∞</div>
+          <div class="nfc-label text-white/40 mt-1">enlaces<br/>regrabables</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-5 relative">
+      <div class="absolute -inset-12 bg-legion-500/15 blur-3xl rounded-full"></div>
+      <img src="img/llavero-real.jpeg" alt="Llavero NFC CEO LEGION Founders Edition" class="relative rounded-3xl border border-white/10 glow-blue w-full" />
+      <div class="absolute bottom-6 left-6 glass border border-white/10 rounded-2xl px-5 py-3">
+        <div class="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-1">Founders Key</div>
+        <div class="text-lg font-display font-bold text-white">53,9 × 30 mm · Made in Spain</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#concepto" class="absolute bottom-8 left-1/2 -translate-x-1/2 inline-flex flex-col items-center gap-3 text-xs text-white/40 hover:text-white/80 transition">
+    <span class="tracking-[0.3em] uppercase">Empezar</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="animate-bounce">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </a>
+</section>
+
+<!-- ============== MARQUEE STATS ============== -->
+<section class="relative py-8 border-y border-white/5 bg-ink-800/50 marquee">
+  <div class="marquee-track text-white/30 title-wide text-sm">
+    <span>One tap · Una legión</span><span class="text-legion-500">×</span>
+    <span>Founders Edition V01</span><span class="text-legion-500">×</span>
+    <span>Made in Spain</span><span class="text-legion-500">×</span>
+    <span>Impresión 3D · 12,5 h por tirada</span><span class="text-legion-500">×</span>
+    <span>NFC activación garantizada</span><span class="text-legion-500">×</span>
+    <span>Personalización individual</span><span class="text-legion-500">×</span>
+    <span>One tap · Una legión</span><span class="text-legion-500">×</span>
+    <span>Founders Edition V01</span><span class="text-legion-500">×</span>
+    <span>Made in Spain</span><span class="text-legion-500">×</span>
+    <span>Impresión 3D · 12,5 h por tirada</span><span class="text-legion-500">×</span>
+    <span>NFC activación garantizada</span><span class="text-legion-500">×</span>
+    <span>Personalización individual</span><span class="text-legion-500">×</span>
+  </div>
+</section>
+
+<!-- ============== 2. CONCEPTO ============== -->
+<section id="concepto" class="relative py-32 corner-mark border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+
+    <div class="reveal order-2 lg:order-1 relative">
+      <div class="absolute -inset-8 bg-legion-500/10 blur-3xl rounded-full"></div>
+      <img src="img/tap-phone.png" alt="CEO tocando el llavero NFC con su iPhone" class="relative rounded-3xl border border-white/10 glow-blue w-full" />
+    </div>
+
+    <div class="reveal order-1 lg:order-2">
+      <span class="badge mb-6">01 · Concepto</span>
+      <h2 class="title-mega text-5xl md:text-6xl mb-8 mt-6">
+        Más que un llavero.<br/>
+        <span class="text-legion-400">Una llave.</span>
+      </h2>
+      <p class="text-xl text-white/70 mb-6 leading-relaxed">
+        Una comunidad genera atención. El NFC la convierte en <span class="text-white font-medium">acción</span>.
+      </p>
+      <p class="text-base text-white/55 mb-10 leading-relaxed">
+        Cada legionario lleva su Founders Key encima. Cuando lo ven, saben quién eres. Cuando lo tocan, entran. Sin app, sin batería, sin instalación.
+      </p>
+
+      <div class="space-y-3">
+        <div class="nfc-label text-legion-400/90 mb-3">Activación desde un solo toque</div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex items-start gap-3 p-4 bg-white/[0.03] border border-white/5 rounded-xl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2" class="mt-0.5 flex-shrink-0"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <div>
+              <div class="text-sm font-medium">Acceso a Skool</div>
+              <div class="text-xs text-white/40">Comunidad en 1 tap</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white/[0.03] border border-white/5 rounded-xl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2" class="mt-0.5 flex-shrink-0"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11h-6M19 8v6"/></svg>
+            <div>
+              <div class="text-sm font-medium">Link "Invite a Legend"</div>
+              <div class="text-xs text-white/40">+20 % comisión vitalicia</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white/[0.03] border border-white/5 rounded-xl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2" class="mt-0.5 flex-shrink-0"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            <div>
+              <div class="text-sm font-medium">Calendly del legionario</div>
+              <div class="text-xs text-white/40">Hot seat o llamada directa</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white/[0.03] border border-white/5 rounded-xl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2" class="mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <div>
+              <div class="text-sm font-medium">Web personal</div>
+              <div class="text-xs text-white/40">Bio, redes, links</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white/[0.03] border border-white/5 rounded-xl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2" class="mt-0.5 flex-shrink-0"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>
+            <div>
+              <div class="text-sm font-medium">Onboarding físico</div>
+              <div class="text-xs text-white/40">Bienvenida que se siente</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white/[0.03] border border-white/5 rounded-xl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2" class="mt-0.5 flex-shrink-0"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+            <div>
+              <div class="text-sm font-medium">Reescribible ∞</div>
+              <div class="text-xs text-white/40">Cambia el link cuando quieras</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="activar.html" class="inline-flex items-center gap-2 mt-8 text-sm text-legion-400 hover:text-legion-300 transition">
+        Ver cómo se activa el llavero
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 3. THE QUOTE / Reconocimiento ============== -->
+<section class="relative py-32 corner-mark border-t border-white/5 bg-gradient-to-b from-ink-900 via-ink-800/50 to-ink-900">
+  <div class="max-w-5xl mx-auto px-6 text-center reveal">
+    <div class="nfc-label text-legion-400 mb-8">02 · Reconocimiento</div>
+    <p class="title-mega text-4xl md:text-6xl lg:text-7xl text-white leading-[1.05] quote-marks">
+      Cuando lo <span class="text-legion-400">ven</span>, saben quién eres.<br/>
+      Cuando lo <span class="text-legion-400">tocan</span>, entran.<span class="text-legion-400">"</span>
+    </p>
+    <div class="mt-12 flex items-center justify-center gap-4 text-xs text-white/30 tracking-[0.3em] uppercase">
+      <div class="w-16 scan-line"></div>
+      <span>Founders Key V01</span>
+      <div class="w-16 scan-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 4. THE FOUNDERS CARD ============== -->
+<section class="relative py-32 corner-mark border-t border-white/5 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
+
+    <div class="lg:col-span-5 reveal">
+      <span class="badge mb-6">03 · La tarjeta</span>
+      <h2 class="title-mega text-5xl md:text-6xl mb-8 mt-6">
+        Una tarjeta que <span class="text-legion-400">enseña a usarlo</span>.
+      </h2>
+      <p class="text-lg text-white/60 mb-6 leading-relaxed">
+        Cada llavero va con su Founders Card: instrucciones de uso, identidad de la edición y guiño coleccionable para tu legionario.
+      </p>
+      <ul class="space-y-3 text-sm text-white/55">
+        <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-legion-400 mt-1.5 flex-shrink-0"></span>Anverso con pasos de activación · sin manual, sin fricción.</li>
+        <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-legion-400 mt-1.5 flex-shrink-0"></span>Reverso: <em>CEO LEGION · Founders Edition · Est. 2026 · V01 · Made in Spain</em>.</li>
+        <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-legion-400 mt-1.5 flex-shrink-0"></span>Numeración opcional (#001 a #100) para los founders originales.</li>
+      </ul>
+    </div>
+
+    <div class="lg:col-span-7 reveal relative">
+      <div class="absolute -inset-12 bg-legion-500/15 blur-3xl rounded-full"></div>
+      <div class="relative grid grid-cols-2 gap-4">
+
+        <div class="aspect-[3/4] rounded-2xl border border-white/10 bg-gradient-to-br from-ink-700 via-ink-800 to-ink-900 p-6 flex flex-col justify-between relative overflow-hidden glow-blue blueprint-grid">
+          <div>
+            <div class="nfc-label text-legion-400 mb-3">Founders Key</div>
+            <p class="text-sm text-white/70 leading-snug">Sujeta el móvil con la pantalla hacia ti. Acerca el llavero a la parte superior trasera del móvil (zona NFC).</p>
+            <p class="text-sm text-white/70 leading-snug mt-3">Cuando aparezca la notificación «CEO», púlsala.</p>
+          </div>
+          <div class="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-legion-500/20 flex items-center justify-center">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+          </div>
+        </div>
+
+        <div class="aspect-[3/4] rounded-2xl border border-white/10 bg-gradient-to-br from-ink-800 to-ink-900 p-6 flex flex-col justify-between relative overflow-hidden">
+          <div class="space-y-1 text-[10px] tracking-[0.3em] uppercase text-white/45 leading-relaxed">
+            <div class="text-legion-400/80">CEO LEGION</div>
+            <div>Founders Edition</div>
+            <div>Est. 2026</div>
+            <div>V01</div>
+            <div>Made in Spain</div>
+          </div>
+          <div class="absolute bottom-4 right-4 text-[9px] text-white/30 tracking-[0.3em]">
+            53,9 × 30 mm
+          </div>
+          <div class="absolute top-4 right-4 w-3 h-3 rounded-full border border-legion-400/40 flex items-center justify-center">
+            <div class="w-1 h-1 rounded-full bg-legion-400"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 5. PROCESO DE CREACIÓN (con foto real de imprimiendo) ============== -->
+<section id="proceso" class="relative py-32 corner-mark border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="grid lg:grid-cols-12 gap-12 items-end mb-20">
+      <div class="lg:col-span-7 reveal">
+        <span class="badge mb-6">04 · Forja</span>
+        <h2 class="title-mega text-5xl md:text-6xl mb-6 mt-6">
+          Cada pieza, una <span class="text-legion-400">forja</span>.
+        </h2>
+        <p class="text-lg text-white/55 max-w-2xl">
+          No imprimimos en masa. Cada Founders Key pasa por cinco fases de fabricación artesanal antes de salir de NFC-LAB. Aquí no hay aliexpress.
+        </p>
+      </div>
+      <div class="lg:col-span-5 grid grid-cols-2 gap-4 reveal">
+        <div class="p-5 bg-white/[0.03] border border-white/10 rounded-2xl">
+          <div class="font-display text-3xl font-bold text-legion-400">+5 h</div>
+          <div class="text-xs text-white/50 mt-1">Diseño por modelo</div>
+        </div>
+        <div class="p-5 bg-white/[0.03] border border-white/10 rounded-2xl">
+          <div class="font-display text-3xl font-bold text-legion-400">12,5 h</div>
+          <div class="text-xs text-white/50 mt-1">Por tirada</div>
+        </div>
+        <div class="p-5 bg-white/[0.03] border border-white/10 rounded-2xl">
+          <div class="font-display text-3xl font-bold text-legion-400">1×1</div>
+          <div class="text-xs text-white/50 mt-1">QC manual</div>
+        </div>
+        <div class="p-5 bg-white/[0.03] border border-white/10 rounded-2xl">
+          <div class="font-display text-3xl font-bold text-legion-400">100%</div>
+          <div class="text-xs text-white/50 mt-1">NFC verificado</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Foto real imprimiendo full bleed -->
+    <div class="relative rounded-3xl overflow-hidden border border-white/10 mb-20 reveal">
+      <img src="img/imprimiendo.jpeg" alt="Llaveros CEO LEGION en la impresora 3D" class="w-full h-[70vh] object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+        <div class="badge mb-4 bg-ink-900/60">
+          <span class="w-1.5 h-1.5 rounded-full bg-legion-400 pulse-dot"></span>
+          IMPRESIÓN EN VIVO · STUDIO NFC-LAB
+        </div>
+        <h3 class="title-mega text-4xl md:text-5xl text-white max-w-3xl">
+          100 Founders Keys saliendo del horno.<br/>
+          <span class="text-legion-400">Esto no se compra. Se forja.</span>
+        </h3>
+      </div>
+    </div>
+
+    <!-- Numbered steps -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div class="reveal">
+        <div class="num-step mb-3">01</div>
+        <h4 class="font-display text-lg font-bold mb-2">Diseño</h4>
+        <p class="text-xs text-white/55 leading-relaxed">+5 h de diseño y optimización por modelo antes de tocar la impresora.</p>
+      </div>
+      <div class="reveal">
+        <div class="num-step mb-3">02</div>
+        <h4 class="font-display text-lg font-bold mb-2">Impresión 3D</h4>
+        <p class="text-xs text-white/55 leading-relaxed">Tiradas de +12,5 h con material premium resistente a uso diario.</p>
+      </div>
+      <div class="reveal">
+        <div class="num-step mb-3">03</div>
+        <h4 class="font-display text-lg font-bold mb-2">QC manual</h4>
+        <p class="text-xs text-white/55 leading-relaxed">Pieza a pieza. Solo pasan los que cumplen nuestros estándares.</p>
+      </div>
+      <div class="reveal">
+        <div class="num-step mb-3">04</div>
+        <h4 class="font-display text-lg font-bold mb-2">Montaje</h4>
+        <p class="text-xs text-white/55 leading-relaxed">Anilla y mosquetón colocados individualmente. Limpieza final manual.</p>
+      </div>
+      <div class="reveal">
+        <div class="num-step mb-3">05</div>
+        <h4 class="font-display text-lg font-bold mb-2">Activación</h4>
+        <p class="text-xs text-white/55 leading-relaxed">NFC verificado unidad por unidad. Saldría a tiempo o no saldría.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 6. DESK SHOT — LIFESTYLE ============== -->
+<section class="relative py-0 border-t border-white/5">
+  <div class="relative h-[80vh] min-h-[500px] overflow-hidden corner-mark">
+    <img src="img/desk.png" alt="Llavero CEO LEGION sobre escritorio de CEO" class="absolute inset-0 w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-r from-ink-900 via-ink-900/60 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-ink-900 via-transparent to-transparent"></div>
+
+    <div class="relative h-full max-w-7xl mx-auto px-6 flex items-center">
+      <div class="max-w-2xl reveal">
+        <span class="badge mb-6">05 · En la mesa</span>
+        <h2 class="title-mega text-5xl md:text-7xl mb-8 leading-[0.95] mt-6">
+          Convive con tu <span class="text-legion-400">MacBook</span>.<br/>
+          Vive con tu llavero.
+        </h2>
+        <p class="text-xl text-white/70 leading-relaxed">
+          No es merchandising. Es un objeto que <span class="text-white font-medium">se queda en la mesa</span>, en la mochila y en la conversación.
+        </p>
+        <div class="mt-10 flex items-center gap-4 text-xs text-white/40 tracking-wider uppercase">
+          <span>NFC-LAB · 2026</span>
+          <div class="flex-1 scan-line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 7. PERSONALIZACIÓN ============== -->
+<section class="relative py-32 corner-mark border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
+
+    <div class="lg:col-span-6 reveal">
+      <span class="badge mb-6">06 · Personalización</span>
+      <h2 class="title-mega text-5xl md:text-6xl mb-8 mt-6">
+        Un llavero,<br/>
+        <span class="text-legion-400">100 destinos.</span>
+      </h2>
+      <p class="text-lg text-white/60 mb-6 leading-relaxed">
+        Cada legionario configura su propio enlace. Su link de Skool, su Calendly, su perfil, lo que necesite ese mes.
+      </p>
+      <p class="text-base text-white/50 mb-8 leading-relaxed">
+        Sin pedir nada al fabricante. Sin esperar reposiciones. Con una app gratuita y 30 segundos por llavero, cada CEO escribe su propio destino.
+      </p>
+
+      <div class="space-y-3 mb-8">
+        <div class="flex items-center gap-4 p-4 bg-white/[0.03] border border-white/10 rounded-xl">
+          <div class="w-10 h-10 rounded-full bg-legion-500/15 flex items-center justify-center flex-shrink-0">
+            <span class="font-display font-bold text-legion-400">1</span>
+          </div>
+          <span class="text-sm text-white/70">Descarga NFC21 Tools (iPhone) o NFC Tools (Android).</span>
+        </div>
+        <div class="flex items-center gap-4 p-4 bg-white/[0.03] border border-white/10 rounded-xl">
+          <div class="w-10 h-10 rounded-full bg-legion-500/15 flex items-center justify-center flex-shrink-0">
+            <span class="font-display font-bold text-legion-400">2</span>
+          </div>
+          <span class="text-sm text-white/70">Copia tu link «Invite a Legend» desde Skool.</span>
+        </div>
+        <div class="flex items-center gap-4 p-4 bg-white/[0.03] border border-white/10 rounded-xl">
+          <div class="w-10 h-10 rounded-full bg-legion-500/15 flex items-center justify-center flex-shrink-0">
+            <span class="font-display font-bold text-legion-400">3</span>
+          </div>
+          <span class="text-sm text-white/70">«Write to NFC» y acerca el móvil al llavero. Listo.</span>
+        </div>
+      </div>
+
+      <a href="activar.html" class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-legion-500/50 text-white px-5 py-3 rounded-full text-sm font-medium transition">
+        Guía completa paso a paso
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="lg:col-span-6 reveal relative">
+      <div class="absolute -inset-8 bg-legion-500/10 blur-3xl rounded-full"></div>
+      <img src="img/diamond-box.png" alt="Pack Diamond con caja, llavero, tarjeta y posavasos" class="relative rounded-3xl border border-white/10 glow-blue w-full" />
+    </div>
+  </div>
+</section>
+
+<!-- ============== 8. PACKS ============== -->
+<section id="packs" class="relative py-32 corner-mark border-t border-white/5 bg-gradient-to-b from-ink-900 via-ink-800/40 to-ink-900">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="max-w-3xl mb-12 reveal text-center mx-auto">
+      <span class="badge mb-6">07 · Packs</span>
+      <h2 class="title-mega text-5xl md:text-6xl mb-6 mt-6">
+        Tres formas de <span class="text-legion-400">equipar la legión</span>.
+      </h2>
+      <p class="text-lg text-white/55">
+        Pack principal de <span class="text-white font-medium">100 llaveros</span> + <span class="text-white font-medium">mensualidad de 20</span> al mes para los nuevos legionarios que entren.
+      </p>
+    </div>
+
+    <!-- Scarcity bar -->
+    <div class="max-w-4xl mx-auto mb-14 reveal">
+      <div class="flex items-center justify-center gap-3 p-4 bg-gradient-to-r from-red-500/10 via-amber-500/10 to-red-500/10 border border-amber-500/30 rounded-2xl">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" class="flex-shrink-0"><path d="M12 9v2m0 4h.01M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/></svg>
+        <p class="text-sm text-amber-100/90 text-center">
+          <strong class="text-white">Founders Edition V01.</strong> Solo producimos <strong class="text-amber-300">100 unidades al mes</strong>. Cuando se agotan, espera al siguiente lote (~12 días).
+        </p>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6 items-stretch">
+
+      <!-- PACK ESTÁNDAR -->
+      <div class="bg-white/[0.03] border border-white/10 rounded-3xl p-8 flex flex-col card-hover reveal">
+        <div class="mb-6">
+          <div class="nfc-label mb-3">Pack</div>
+          <h3 class="font-display text-3xl font-bold">ESTÁNDAR</h3>
+          <p class="text-xs text-white/50 mt-2 leading-relaxed">El básico. Llavero + tarjeta de instrucciones en bolsa de papel personalizada.</p>
+        </div>
+
+        <div class="space-y-2 mb-6 flex-1">
+          <div class="text-[10px] uppercase tracking-[0.25em] text-white/40 mb-3">Qué incluye cada unidad · valor real</div>
+
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/5">
+            <span class="flex items-center gap-2 text-white/70"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Llavero NFC Founders Key</span>
+            <span class="text-white/50 tabular-nums">12,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/5">
+            <span class="flex items-center gap-2 text-white/70"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Tarjeta de uso impresa</span>
+            <span class="text-white/50 tabular-nums">2,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/5">
+            <span class="flex items-center gap-2 text-white/70"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Bolsa de papel personalizada</span>
+            <span class="text-white/50 tabular-nums">2,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/5">
+            <span class="flex items-center gap-2 text-white/70"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Personalización individual</span>
+            <span class="text-white/50 tabular-nums">8,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/5">
+            <span class="flex items-center gap-2 text-white/70"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Activación NFC garantizada</span>
+            <span class="text-white/50 tabular-nums">3,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-2 border-b border-emerald-500/30 bg-emerald-500/[0.06] -mx-2 px-2 rounded">
+            <span class="flex items-center gap-2 text-emerald-300 font-medium"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Envío a toda España</span>
+            <span class="flex items-center gap-1.5"><span class="text-[9px] uppercase tracking-[0.2em] bg-emerald-500 text-ink-900 px-1.5 py-0.5 rounded font-bold">REGALO</span><span class="text-white/40 tabular-nums line-through">5,00 €</span></span>
+          </div>
+
+          <div class="pt-4">
+            <div class="flex items-center justify-between text-xs text-white/50 mb-2">
+              <span>Valor total real</span>
+              <span class="line-through tabular-nums">32,00 € /ud</span>
+            </div>
+            <div class="flex items-baseline justify-between mb-1">
+              <span class="text-xs uppercase tracking-[0.2em] text-white/70">Tu precio</span>
+              <div><span class="text-3xl font-display font-bold text-white">6,20 €</span><span class="text-xs text-white/40"> /ud</span></div>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-emerald-400">Ahorras 25,80 € por unidad</span>
+              <span class="text-emerald-400 font-bold">−81%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-white/10 pt-6 space-y-4">
+          <div class="flex items-end justify-between">
+            <div>
+              <div class="text-[10px] uppercase tracking-[0.25em] text-white/40">Pack inicial · 100 ud</div>
+              <div class="font-display text-4xl font-bold leading-none">620 €</div>
+              <div class="text-[11px] text-white/40 line-through tabular-nums mt-1">3.200 € valor real</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] uppercase tracking-[0.25em] text-emerald-400">Ahorras</div>
+              <div class="text-lg font-display font-bold text-emerald-400">2.580 €</div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-legion-500/5 border border-legion-500/20 rounded-xl">
+            <div>
+              <div class="text-[10px] uppercase tracking-[0.25em] text-legion-300">Mensualidad · +20/mes</div>
+              <div class="text-xs text-white/40">para nuevos legionarios</div>
+            </div>
+            <div class="font-display text-xl font-bold text-legion-300">124 €<span class="text-xs font-normal text-white/40">/mes</span></div>
+          </div>
+          <a href="#contacto" class="block text-center text-sm font-medium border border-white/15 hover:border-white/40 text-white px-4 py-3 rounded-full transition">Reservar Estándar</a>
+        </div>
+      </div>
+
+      <!-- PACK GOLD -->
+      <div class="bg-white/[0.03] border border-white/10 rounded-3xl p-8 flex flex-col card-hover reveal">
+        <div class="mb-6">
+          <div class="nfc-label mb-3">Pack</div>
+          <h3 class="font-display text-3xl font-bold">GOLD</h3>
+          <p class="text-xs text-white/50 mt-2 leading-relaxed">Sube de nivel. Caja metálica reutilizable que se queda en la mesa del CEO.</p>
+        </div>
+
+        <div class="space-y-2 mb-6 flex-1">
+          <div class="text-[10px] uppercase tracking-[0.25em] text-white/40 mb-3">Qué incluye cada unidad · valor real</div>
+
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/5">
+            <span class="flex items-center gap-2 text-white/70"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Llavero NFC Founders Key</span>
+            <span class="text-white/50 tabular-nums">12,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/5">
+            <span class="flex items-center gap-2 text-white/70"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Tarjeta de uso impresa</span>
+            <span class="text-white/50 tabular-nums">2,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/5">
+            <span class="flex items-center gap-2 text-white font-medium"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Caja metálica premium</span>
+            <span class="text-white/50 tabular-nums">6,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/5">
+            <span class="flex items-center gap-2 text-white/70"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Personalización individual</span>
+            <span class="text-white/50 tabular-nums">8,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/5">
+            <span class="flex items-center gap-2 text-white/70"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Activación NFC garantizada</span>
+            <span class="text-white/50 tabular-nums">3,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-2 border-b border-emerald-500/30 bg-emerald-500/[0.06] -mx-2 px-2 rounded">
+            <span class="flex items-center gap-2 text-emerald-300 font-medium"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Envío a toda España</span>
+            <span class="flex items-center gap-1.5"><span class="text-[9px] uppercase tracking-[0.2em] bg-emerald-500 text-ink-900 px-1.5 py-0.5 rounded font-bold">REGALO</span><span class="text-white/40 tabular-nums line-through">5,00 €</span></span>
+          </div>
+
+          <div class="pt-4">
+            <div class="flex items-center justify-between text-xs text-white/50 mb-2">
+              <span>Valor total real</span>
+              <span class="line-through tabular-nums">36,00 € /ud</span>
+            </div>
+            <div class="flex items-baseline justify-between mb-1">
+              <span class="text-xs uppercase tracking-[0.2em] text-white/70">Tu precio</span>
+              <div><span class="text-3xl font-display font-bold text-white">7,20 €</span><span class="text-xs text-white/40"> /ud</span></div>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-emerald-400">Ahorras 28,80 € por unidad</span>
+              <span class="text-emerald-400 font-bold">−80%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-white/10 pt-6 space-y-4">
+          <div class="flex items-end justify-between">
+            <div>
+              <div class="text-[10px] uppercase tracking-[0.25em] text-white/40">Pack inicial · 100 ud</div>
+              <div class="font-display text-4xl font-bold leading-none">720 €</div>
+              <div class="text-[11px] text-white/40 line-through tabular-nums mt-1">3.600 € valor real</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] uppercase tracking-[0.25em] text-emerald-400">Ahorras</div>
+              <div class="text-lg font-display font-bold text-emerald-400">2.880 €</div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-legion-500/5 border border-legion-500/20 rounded-xl">
+            <div>
+              <div class="text-[10px] uppercase tracking-[0.25em] text-legion-300">Mensualidad · +20/mes</div>
+              <div class="text-xs text-white/40">para nuevos legionarios</div>
+            </div>
+            <div class="font-display text-xl font-bold text-legion-300">144 €<span class="text-xs font-normal text-white/40">/mes</span></div>
+          </div>
+          <a href="#contacto" class="block text-center text-sm font-medium border border-white/15 hover:border-white/40 text-white px-4 py-3 rounded-full transition">Reservar Gold</a>
+        </div>
+      </div>
+
+      <!-- PACK DIAMOND (POPULAR) -->
+      <div class="relative pack-popular border rounded-3xl p-8 flex flex-col card-hover reveal ring-glow">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-legion-500 text-white text-[10px] uppercase tracking-[0.3em] px-4 py-1.5 rounded-full font-medium whitespace-nowrap">
+          ★ Más elegido · Mejor ratio
+        </div>
+
+        <div class="mb-6">
+          <div class="nfc-label mb-3 text-legion-300">Pack</div>
+          <h3 class="font-display text-3xl font-bold">DIAMOND</h3>
+          <p class="text-xs text-white/60 mt-2 leading-relaxed">El ritual. Caja de cartón con caja metálica dentro, llavero, tarjeta, posavasos y nota personalizada. El onboarding que se cuenta.</p>
+        </div>
+
+        <div class="space-y-2 mb-6 flex-1">
+          <div class="text-[10px] uppercase tracking-[0.25em] text-white/50 mb-3">Qué incluye cada unidad · valor real</div>
+
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/10">
+            <span class="flex items-center gap-2 text-white/80"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Llavero NFC Founders Key</span>
+            <span class="text-white/55 tabular-nums">12,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/10">
+            <span class="flex items-center gap-2 text-white/80"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Tarjeta de uso impresa</span>
+            <span class="text-white/55 tabular-nums">2,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/10">
+            <span class="flex items-center gap-2 text-white/80"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Caja metálica premium</span>
+            <span class="text-white/55 tabular-nums">6,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/10">
+            <span class="flex items-center gap-2 text-white font-medium"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Posavasos CEO LEGION</span>
+            <span class="text-white/55 tabular-nums">5,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/10">
+            <span class="flex items-center gap-2 text-white font-medium"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Nota personalizada</span>
+            <span class="text-white/55 tabular-nums">3,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/10">
+            <span class="flex items-center gap-2 text-white/80"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Caja de cartón exterior</span>
+            <span class="text-white/55 tabular-nums">3,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/10">
+            <span class="flex items-center gap-2 text-white/80"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Personalización individual</span>
+            <span class="text-white/55 tabular-nums">8,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-1.5 border-b border-white/10">
+            <span class="flex items-center gap-2 text-white/80"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Activación NFC garantizada</span>
+            <span class="text-white/55 tabular-nums">3,00 €</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 text-xs py-2 border-b border-emerald-500/40 bg-emerald-500/[0.08] -mx-2 px-2 rounded">
+            <span class="flex items-center gap-2 text-emerald-300 font-medium"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Envío a toda España</span>
+            <span class="flex items-center gap-1.5"><span class="text-[9px] uppercase tracking-[0.2em] bg-emerald-500 text-ink-900 px-1.5 py-0.5 rounded font-bold">REGALO</span><span class="text-white/40 tabular-nums line-through">5,00 €</span></span>
+          </div>
+
+          <div class="pt-4">
+            <div class="flex items-center justify-between text-xs text-white/50 mb-2">
+              <span>Valor total real</span>
+              <span class="line-through tabular-nums">47,00 € /ud</span>
+            </div>
+            <div class="flex items-baseline justify-between mb-1">
+              <span class="text-xs uppercase tracking-[0.2em] text-white/70">Tu precio</span>
+              <div><span class="text-3xl font-display font-bold text-white">9,90 €</span><span class="text-xs text-white/40"> /ud</span></div>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-emerald-400 font-medium">Ahorras 37,10 € por unidad</span>
+              <span class="text-emerald-400 font-bold">−79%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-white/15 pt-6 space-y-4">
+          <div class="flex items-end justify-between">
+            <div>
+              <div class="text-[10px] uppercase tracking-[0.25em] text-white/50">Pack inicial · 100 ud</div>
+              <div class="font-display text-4xl font-bold text-white leading-none">990 €</div>
+              <div class="text-[11px] text-white/40 line-through tabular-nums mt-1">4.700 € valor real</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] uppercase tracking-[0.25em] text-emerald-400">Ahorras</div>
+              <div class="text-lg font-display font-bold text-emerald-400">3.710 €</div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-legion-500/15 border border-legion-500/40 rounded-xl">
+            <div>
+              <div class="text-[10px] uppercase tracking-[0.25em] text-legion-300">Mensualidad · +20/mes</div>
+              <div class="text-xs text-white/50">para nuevos legionarios</div>
+            </div>
+            <div class="font-display text-xl font-bold text-white">198 €<span class="text-xs font-normal text-white/50">/mes</span></div>
+          </div>
+          <a href="#contacto" class="block text-center text-sm font-medium bg-legion-500 hover:bg-legion-600 text-white px-4 py-3 rounded-full transition">Reservar Diamond ★</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-12 grid sm:grid-cols-3 gap-4 text-xs text-white/40 max-w-5xl mx-auto">
+      <p class="flex items-start gap-2"><span class="text-emerald-400">·</span>Precios sin IVA. <strong class="text-emerald-300">Envío gratis</strong> en los tres packs.</p>
+      <p class="flex items-start gap-2"><span class="text-legion-400">·</span>Personalización individual incluida en todos los packs.</p>
+      <p class="flex items-start gap-2"><span class="text-legion-400">·</span>Mensualidad cancelable con 30 días de aviso.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 8B. BONUS STACK + GARANTÍA ============== -->
+<section class="relative py-24 corner-mark border-t border-white/5">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="text-center mb-12 reveal">
+      <span class="badge mb-6" style="border-color: rgba(52,211,153,0.35); background: rgba(52,211,153,0.08); color: #6ee7b7;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
+        Bonus exclusivos CEO LEGION
+      </span>
+      <h2 class="title-mega text-4xl md:text-5xl mt-6 mb-4">
+        Y aún <span class="text-legion-400">más cosas</span> dentro.
+      </h2>
+      <p class="text-base text-white/55 max-w-2xl mx-auto">
+        Tres extras que normalmente cobramos aparte, pero que entran de regalo si firmáis antes del 26 de junio.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+
+      <div class="bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/30 rounded-2xl p-6 reveal">
+        <div class="flex items-start justify-between mb-3">
+          <span class="text-[9px] uppercase tracking-[0.25em] bg-emerald-500 text-ink-900 px-2 py-1 rounded font-bold">BONUS 01</span>
+          <span class="text-xs text-white/40 line-through tabular-nums">290 €</span>
+        </div>
+        <h3 class="font-display text-lg font-bold mb-2">Landing personalizada</h3>
+        <p class="text-xs text-white/55 leading-relaxed mb-3">Página de bienvenida con tu marca, datos del legionario y CTA a Skool. Editable.</p>
+        <div class="text-xs text-emerald-300 font-medium">→ Incluida sin coste</div>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/30 rounded-2xl p-6 reveal">
+        <div class="flex items-start justify-between mb-3">
+          <span class="text-[9px] uppercase tracking-[0.25em] bg-emerald-500 text-ink-900 px-2 py-1 rounded font-bold">BONUS 02</span>
+          <span class="text-xs text-white/40 line-through tabular-nums">490 €</span>
+        </div>
+        <h3 class="font-display text-lg font-bold mb-2">Dashboard de leads</h3>
+        <p class="text-xs text-white/55 leading-relaxed mb-3">Cuántos taps, desde dónde, qué llaveros convierten más legionarios. En tiempo real.</p>
+        <div class="text-xs text-emerald-300 font-medium">→ Incluido sin coste</div>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/30 rounded-2xl p-6 reveal">
+        <div class="flex items-start justify-between mb-3">
+          <span class="text-[9px] uppercase tracking-[0.25em] bg-emerald-500 text-ink-900 px-2 py-1 rounded font-bold">BONUS 03</span>
+          <span class="text-xs text-white/40 line-through tabular-nums">180 €</span>
+        </div>
+        <h3 class="font-display text-lg font-bold mb-2">Onboarding 1:1 con Uriel</h3>
+        <p class="text-xs text-white/55 leading-relaxed mb-3">Videollamada 30 min para configurar el primer lote y resolver dudas.</p>
+        <div class="text-xs text-emerald-300 font-medium">→ Incluido sin coste</div>
+      </div>
+
+    </div>
+
+    <!-- Garantía -->
+    <div class="reveal bg-gradient-to-r from-legion-500/10 via-ink-700/40 to-legion-500/10 border border-legion-500/30 rounded-3xl p-8 md:p-10">
+      <div class="grid md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-2 flex justify-center">
+          <div class="w-24 h-24 rounded-full bg-ink-800 border-2 border-legion-500/40 flex items-center justify-center">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+        </div>
+        <div class="md:col-span-7">
+          <div class="nfc-label text-legion-300 mb-2">Garantía NFC-LAB</div>
+          <h3 class="title-mega text-2xl md:text-3xl mb-3">Si un llavero falla, te lo cambiamos.</h3>
+          <p class="text-sm text-white/65 leading-relaxed">
+            Cobertura vitalicia del chip NFC. Si en algún momento un llavero deja de funcionar por defecto de fábrica, lo sustituimos sin coste. Sin formularios. Sin discusiones. Solo escríbenos.
+          </p>
+        </div>
+        <div class="md:col-span-3 text-center md:text-right">
+          <div class="font-display text-5xl font-bold text-legion-400">∞</div>
+          <div class="nfc-label text-white/40 mt-2">Cobertura vitalicia</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suma de bonos -->
+    <div class="mt-8 reveal text-center">
+      <p class="text-sm text-white/50">
+        Suma de bonos:
+        <span class="line-through text-white/40 tabular-nums">960 €</span>
+        →
+        <strong class="text-emerald-300">incluidos al firmar antes del 26 de junio</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 8C. ROI / BREAK-EVEN ============== -->
+<section class="relative py-24 corner-mark border-t border-white/5 bg-gradient-to-b from-ink-900 via-ink-800/40 to-ink-900">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="text-center mb-16 reveal">
+      <span class="badge mb-6">Las matemáticas</span>
+      <h2 class="title-mega text-4xl md:text-5xl mt-6 mb-4">
+        Recuperas el pack con <span class="text-legion-400">3 nuevos legionarios</span>.
+      </h2>
+      <p class="text-base text-white/55 max-w-2xl mx-auto">
+        Tu membresía está a 19 $/mes. Si un solo llavero convierte a UN nuevo legionario, ese llavero ya se ha pagado. El resto es margen puro.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-10">
+      <div class="text-center reveal p-8 bg-white/[0.03] border border-white/10 rounded-2xl">
+        <div class="nfc-label text-white/40 mb-3">Inversión inicial</div>
+        <div class="font-display text-4xl font-bold text-white mb-2">990 €</div>
+        <div class="text-xs text-white/40">Pack Diamond · 100 llaveros</div>
+      </div>
+      <div class="text-center reveal p-8 bg-gradient-to-br from-legion-500/15 to-transparent border-2 border-legion-500/40 rounded-2xl">
+        <div class="nfc-label text-legion-300 mb-3">Break-even</div>
+        <div class="font-display text-4xl font-bold text-legion-300 mb-2">3 altas</div>
+        <div class="text-xs text-white/60">a 19 $/mes durante 18 meses</div>
+      </div>
+      <div class="text-center reveal p-8 bg-white/[0.03] border border-white/10 rounded-2xl">
+        <div class="nfc-label text-white/40 mb-3">Si convierte el 10%</div>
+        <div class="font-display text-4xl font-bold text-emerald-400 mb-2">+2.280 $</div>
+        <div class="text-xs text-white/40">año 1 · ROI 230%</div>
+      </div>
+    </div>
+
+    <div class="reveal text-center text-xs text-white/35 max-w-2xl mx-auto">
+      Cálculo conservador asumiendo solo ingreso directo de membresía. No incluye el LTV completo, ventas cruzadas de mentorías ni el coste de adquisición ahorrado vs. ads.
+    </div>
+  </div>
+</section>
+
+<!-- ============== 8D. SOCIAL PROOF ============== -->
+<section class="relative py-24 corner-mark border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-14 reveal">
+      <span class="badge mb-6">Ya confiaron</span>
+      <h2 class="title-mega text-4xl md:text-5xl mt-6">
+        Marcas que ya <span class="text-legion-400">se forjaron</span> con NFC-LAB.
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+      <div class="aspect-square rounded-2xl border border-white/10 bg-white/[0.02] flex flex-col items-center justify-center text-center p-4 card-hover reveal">
+        <div class="font-display text-xl font-bold text-white">Pablo Gil</div>
+        <div class="text-[10px] text-white/40 mt-1 uppercase tracking-[0.2em]">Evento · 1.000 ud</div>
+      </div>
+      <div class="aspect-square rounded-2xl border border-white/10 bg-white/[0.02] flex flex-col items-center justify-center text-center p-4 card-hover reveal">
+        <div class="font-display text-xl font-bold text-white">Audax</div>
+        <div class="text-[10px] text-white/40 mt-1 uppercase tracking-[0.2em]">Pádel · Trofeos</div>
+      </div>
+      <div class="aspect-square rounded-2xl border border-white/10 bg-white/[0.02] flex flex-col items-center justify-center text-center p-4 card-hover reveal">
+        <div class="font-display text-xl font-bold text-white">Biesse</div>
+        <div class="text-[10px] text-white/40 mt-1 uppercase tracking-[0.2em]">Comercial · 4.880 €</div>
+      </div>
+      <div class="aspect-square rounded-2xl border border-white/10 bg-white/[0.02] flex flex-col items-center justify-center text-center p-4 card-hover reveal">
+        <div class="font-display text-xl font-bold text-white">We Are Bold</div>
+        <div class="text-[10px] text-white/40 mt-1 uppercase tracking-[0.2em]">Agencia · Branding</div>
+      </div>
+      <div class="aspect-square rounded-2xl border border-white/10 bg-white/[0.02] flex flex-col items-center justify-center text-center p-4 card-hover reveal">
+        <div class="font-display text-xl font-bold text-white">Sign Floow</div>
+        <div class="text-[10px] text-white/40 mt-1 uppercase tracking-[0.2em]">Eventos · 5.960 €</div>
+      </div>
+      <div class="aspect-square rounded-2xl border border-white/10 bg-white/[0.02] flex flex-col items-center justify-center text-center p-4 card-hover reveal">
+        <div class="font-display text-xl font-bold text-white">Ecomonos</div>
+        <div class="text-[10px] text-white/40 mt-1 uppercase tracking-[0.2em]">Drop · Packaging</div>
+      </div>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="max-w-3xl mx-auto reveal">
+      <div class="bg-white/[0.03] border border-white/10 rounded-3xl p-8 md:p-10 relative">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="rgba(74,158,255,0.2)" class="absolute top-6 left-6"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+        <p class="text-lg md:text-xl text-white/85 leading-relaxed pl-10">
+          "Uriel diseñó nuestro llavero en 4 días y nos lo entregó en 12. Cuando los repartimos en el evento, fue lo único que la gente fotografió. Recomendado 100%."
+        </p>
+        <div class="mt-6 flex items-center gap-4 pl-10">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-legion-400 to-legion-700 flex items-center justify-center font-display font-bold text-white">PG</div>
+          <div>
+            <div class="text-sm font-medium text-white">Pablo Gil</div>
+            <div class="text-xs text-white/45">Evento Octubre 2026 · 1.000 llaveros</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 9. ROADMAP ============== -->
+<section class="relative py-32 corner-mark border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="max-w-3xl mb-16 reveal">
+      <span class="badge mb-6">08 · Roadmap</span>
+      <h2 class="title-mega text-5xl md:text-6xl mb-6 mt-6">
+        De la firma a la <span class="text-legion-400">mano</span> del legionario.
+      </h2>
+    </div>
+
+    <div class="relative">
+      <div class="hidden md:block absolute top-12 left-12 right-12 h-px bg-gradient-to-r from-transparent via-legion-500/40 to-transparent"></div>
+
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="reveal relative">
+          <div class="w-24 h-24 rounded-full bg-ink-700 border border-legion-500/40 flex items-center justify-center mb-6 relative z-10">
+            <span class="font-display text-3xl font-bold text-legion-400">01</span>
+          </div>
+          <h3 class="font-display text-xl font-bold mb-2">Diseño & validación</h3>
+          <p class="text-sm text-white/55 leading-relaxed">Adaptamos el llavero al ADN de CEO LEGION. Mockup y prototipo antes de producir nada.</p>
+          <div class="mt-3 nfc-label text-white/50">3 — 5 días</div>
+        </div>
+        <div class="reveal relative">
+          <div class="w-24 h-24 rounded-full bg-ink-700 border border-legion-500/40 flex items-center justify-center mb-6 relative z-10">
+            <span class="font-display text-3xl font-bold text-legion-400">02</span>
+          </div>
+          <h3 class="font-display text-xl font-bold mb-2">Producción</h3>
+          <p class="text-sm text-white/55 leading-relaxed">Forja del lote de 100. QC manual. NFC verificado unidad por unidad.</p>
+          <div class="mt-3 nfc-label text-white/50">10 — 14 días</div>
+        </div>
+        <div class="reveal relative">
+          <div class="w-24 h-24 rounded-full bg-ink-700 border border-legion-500/40 flex items-center justify-center mb-6 relative z-10">
+            <span class="font-display text-3xl font-bold text-legion-400">03</span>
+          </div>
+          <h3 class="font-display text-xl font-bold mb-2">Entrega + recurrente</h3>
+          <p class="text-sm text-white/55 leading-relaxed">Envío del lote inicial y arranque de la mensualidad de 20 ud/mes en automático.</p>
+          <div class="mt-3 nfc-label text-white/50">48 h envío</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 10. CIERRE / CONTACTO ============== -->
+<section id="contacto" class="relative py-32 corner-mark border-t border-white/5 overflow-hidden">
+  <div class="absolute inset-0 grid-bg opacity-50"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-ink-900 via-transparent to-ink-900"></div>
+
+  <div class="relative max-w-5xl mx-auto px-6 text-center">
+
+    <div class="nfc-label mb-12">09 · Cierre</div>
+
+    <div class="flex items-center justify-center gap-6 md:gap-10 mb-10 flex-wrap">
+      <span class="title-mega text-3xl md:text-5xl text-white">N F C - L A B</span>
+      <span class="title-mega text-3xl md:text-5xl text-legion-400">×</span>
+      <span class="title-mega text-3xl md:text-5xl text-white">C E O   L E G I O N</span>
+    </div>
+
+    <p class="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto mb-16 leading-relaxed">
+      Propuesta diseñada para convertir miembros en <span class="text-legion-400 font-medium">legión</span>: maximizar impacto, captación y retención.
+    </p>
+
+    <div class="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto mb-16">
+      <a href="mailto:uriel@nfc-lab.com" class="block p-6 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-legion-500/50 transition card-hover">
+        <div class="nfc-label text-white/40 mb-2">Email</div>
+        <div class="text-sm font-medium text-white break-all">uriel@nfc-lab.com</div>
+      </a>
+      <a href="tel:+34690390557" class="block p-6 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-legion-500/50 transition card-hover">
+        <div class="nfc-label text-white/40 mb-2">Teléfono</div>
+        <div class="text-sm font-medium text-white">+34 690 390 557</div>
+      </a>
+      <div class="block p-6 bg-white/[0.03] border border-white/10 rounded-2xl">
+        <div class="nfc-label text-white/40 mb-2">Validez</div>
+        <div class="text-sm font-medium text-white">Hasta el 26 de junio de 2026</div>
+      </div>
+    </div>
+
+    <a href="mailto:uriel@nfc-lab.com?subject=CEO%20LEGION%20%C3%97%20NFC-LAB%20%E2%80%94%20Empezamos&body=Hola%20Uriel%2C%20queremos%20arrancar%20con%20el%20pack..." class="inline-flex items-center gap-3 bg-legion-500 hover:bg-legion-600 text-white font-medium px-8 py-4 rounded-full transition text-lg">
+      Iniciar la expedición
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+
+    <p class="mt-6 text-xs text-white/30 tracking-wider">
+      Uriel Iglesias Segura · Founder NFC-LAB
+    </p>
+
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="border-t border-white/5 py-10">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-white/30">
+    <div class="flex items-center gap-3">
+      <div class="w-1.5 h-1.5 rounded-full bg-legion-500 pulse-dot"></div>
+      <span class="title-wide">N F C - L A B  ·  2 0 2 6</span>
+    </div>
+    <div class="title-wide">Propuesta confidencial</div>
+    <a href="activar.html" class="title-wide hover:text-white transition">Activar llavero →</a>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
